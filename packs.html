@@ -1,1 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Away End guide packs — everything you need for every away day, in one download. Premier League, Championship and European packs.">
+<meta name="keywords" content="football away day guide, Premier League away guide pack, away day planner, away end guide download">
+<title>Guide Packs | Away End</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1B5E3B; --green-dark: #113d27; --green-light: #226b44;
+    --amber: #F2A31D; --amber-dark: #d4891a;
+    --white: #FFFFFF; --charcoal: #1A1A18;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: "DM Sans", sans-serif; background: var(--green); color: var(--white); overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 64px; background: rgba(14,48,30,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(242,163,29,0.15); }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--white); }
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--amber); }
+  .nav-cta { background: var(--amber); color: var(--charcoal) !important; padding: 9px 16px; border-radius: 4px; font-weight: 700 !important; display: inline-flex !important; align-items: center !important; white-space: nowrap; }
+  .nav-cta:hover { background: var(--amber-dark) !important; }
+  .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .nav-burger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
+
+  /* HERO */
+  .page-hero { padding: 130px 40px 80px; background: var(--green); position: relative; overflow: hidden; text-align: center; }
+  .page-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.12) 0%, transparent 70%); z-index: 0; }
+  .hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(242,163,29,0.12); border: 1px solid rgba(242,163,29,0.25); color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 2px; margin-bottom: 20px; }
+  .hero-title { font-family: "Bebas Neue", cursive; font-size: clamp(52px, 8vw, 100px); line-height: 0.9; letter-spacing: 2px; margin-bottom: 20px; }
+  .hero-title span { color: var(--amber); }
+  .hero-sub { font-size: 17px; color: rgba(255,255,255,0.6); line-height: 1.7; max-width: 560px; margin: 0 auto; }
+
+  /* TRUST BAR */
+  .trust-bar { background: rgba(0,0,0,0.2); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 16px 40px; }
+  .trust-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; }
+  .trust-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 500; }
+  .trust-icon { color: var(--amber); font-size: 16px; }
+
+  /* PACKS SECTION */
+  .packs-section { padding: 80px 40px; }
+  .packs-inner { max-width: 1280px; margin: 0 auto; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); margin-bottom: 10px; }
+  .section-heading { font-family: "Bebas Neue", cursive; font-size: clamp(36px, 5vw, 56px); letter-spacing: 1px; margin-bottom: 48px; }
+
+  /* PACK CARDS */
+  .packs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; align-items: start; }
+
+  .pack-card { background: var(--green-dark); display: flex; flex-direction: column; position: relative; overflow: hidden; }
+  .pack-card.featured { outline: 2px solid var(--amber); }
+  .pack-card.coming-soon { opacity: 0.6; }
+
+  .pack-badge { position: absolute; top: 20px; right: 20px; background: var(--amber); color: var(--charcoal); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; }
+  .pack-badge.soon { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); }
+
+  .pack-header { padding: 36px 36px 28px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .pack-league { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); margin-bottom: 10px; }
+  .pack-name { font-family: "Bebas Neue", cursive; font-size: 40px; letter-spacing: 1px; line-height: 1; margin-bottom: 12px; }
+  .pack-desc { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+  .pack-contents { padding: 28px 36px; flex: 1; }
+  .pack-contents-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 16px; }
+  .pack-includes { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .pack-include-item { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.4; }
+  .include-tick { color: var(--amber); font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .include-tick.coming { color: rgba(255,255,255,0.2); }
+
+  .pack-grounds { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+  .ground-chip { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; padding: 4px 10px; font-size: 11px; color: rgba(255,255,255,0.45); font-weight: 500; }
+
+  .pack-footer { padding: 24px 36px 36px; border-top: 1px solid rgba(255,255,255,0.06); }
+  .pack-price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 16px; }
+  .pack-price { font-family: "Bebas Neue", cursive; font-size: 52px; color: var(--white); line-height: 1; }
+  .pack-price-note { font-size: 13px; color: rgba(255,255,255,0.35); }
+
+  .btn-buy { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--amber); color: var(--charcoal); padding: 16px 24px; border-radius: 4px; text-decoration: none; font-family: "Bebas Neue", cursive; font-size: 20px; letter-spacing: 1px; transition: all 0.2s; width: 100%; }
+  .btn-buy:hover { background: var(--amber-dark); transform: translateY(-1px); }
+  .btn-buy.disabled { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.25); cursor: not-allowed; pointer-events: none; }
+  .btn-note { font-size: 11px; color: rgba(255,255,255,0.25); text-align: center; margin-top: 10px; line-height: 1.5; }
+
+  /* WHAT'S INSIDE */
+  .inside-section { background: var(--green-dark); padding: 80px 40px; }
+  .inside-inner { max-width: 1280px; margin: 0 auto; }
+  .inside-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin-top: 48px; }
+  .inside-card { background: var(--green); padding: 28px; }
+  .inside-icon { font-size: 28px; margin-bottom: 16px; }
+  .inside-title { font-family: "Bebas Neue", cursive; font-size: 20px; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .inside-text { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  /* FAQ */
+  .faq-section { padding: 80px 40px; }
+  .faq-inner { max-width: 760px; margin: 0 auto; }
+  .faq-list { display: flex; flex-direction: column; gap: 2px; margin-top: 40px; }
+  .faq-item { background: var(--green-dark); }
+  .faq-q { width: 100%; background: none; border: none; color: var(--white); font-family: "DM Sans", sans-serif; font-size: 15px; font-weight: 600; padding: 20px 24px; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .faq-q:hover { color: var(--amber); }
+  .faq-arrow { color: var(--amber); font-size: 18px; flex-shrink: 0; transition: transform 0.2s; }
+  .faq-a { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; padding: 0 24px 20px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .faq-item.open .faq-arrow { transform: rotate(45deg); }
+
+  /* CTA STRIP */
+  .cta-strip { background: var(--amber); padding: 64px 40px; text-align: center; position: relative; overflow: hidden; }
+  .cta-strip::before { content: 'AWAY DAY SORTED'; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-family: "Bebas Neue", cursive; font-size: 160px; color: rgba(26,26,24,0.05); white-space: nowrap; pointer-events: none; letter-spacing: 4px; }
+  .cta-inner { max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
+  .cta-title { font-family: "Bebas Neue", cursive; font-size: clamp(40px, 6vw, 72px); color: var(--charcoal); letter-spacing: 2px; line-height: 0.95; margin-bottom: 16px; }
+  .cta-sub { font-size: 16px; color: rgba(26,26,24,0.6); margin-bottom: 32px; }
+  .btn-cta-dark { display: inline-flex; align-items: center; gap: 10px; background: var(--charcoal); color: var(--white); padding: 16px 32px; border-radius: 4px; text-decoration: none; font-family: "Bebas Neue", cursive; font-size: 20px; letter-spacing: 1px; transition: all 0.2s; }
+  .btn-cta-dark:hover { background: #2a2a28; transform: translateY(-1px); }
+
+  /* FOOTER */
+  footer { background: var(--green-dark); border-top: 1px solid rgba(255,255,255,0.05); padding: 48px 40px 28px; }
+  .footer-inner { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; }
+  .footer-brand-name { font-family: "Bebas Neue", cursive; font-size: 24px; letter-spacing: 2px; }
+  .footer-brand-name span { color: var(--amber); }
+  .footer-tagline { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 4px; letter-spacing: 1.5px; text-transform: uppercase; }
+  .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+  .footer-links a { font-size: 13px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--amber); }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.18); margin-top: 28px; width: 100%; }
+  .footer-affiliate-note { font-size: 11px; color: rgba(255,255,255,0.15); margin-top: 6px; line-height: 1.5; }
+
+  /* MOBILE */
+  @media (max-width: 1024px) { .packs-grid { grid-template-columns: 1fr; } .inside-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--green-dark); padding: 20px; gap: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .nav-burger { display: flex; }
+    .page-hero { padding: 110px 20px 60px; }
+    .packs-section, .inside-section, .faq-section { padding: 60px 20px; }
+    .trust-bar { padding: 16px 20px; }
+    .trust-inner { gap: 24px; }
+    .inside-grid { grid-template-columns: 1fr; }
+    .pack-header, .pack-contents, .pack-footer { padding-left: 24px; padding-right: 24px; }
+    .cta-strip { padding: 48px 20px; }
+    footer { padding: 40px 20px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <span style="font-family:'Bebas Neue',cursive;font-size:22px;letter-spacing:2px;color:var(--white);">AWAY <span style="color:var(--amber)">END</span></span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#guides">Ground Guides</a></li>
+    <li><a href="packs.html" class="active">Packs</a></li>
+    <li><a href="index.html#european">Europe</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#newsletter" class="nav-cta">Get the Newsletter</a></li>
+  </ul>
+  <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="hero-tag">📦 Guide Packs</div>
+    <h1 class="hero-title">Every Away Day.<br><span>One Download.</span></h1>
+    <p class="hero-sub">Stop planning from scratch every time. Our guide packs give you everything — away end info, pubs, travel, tips and ratings — for every ground in the division.</p>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="trust-icon">✓</span> Fan-verified content</div>
+    <div class="trust-item"><span class="trust-icon">✓</span> Instant PDF download</div>
+    <div class="trust-item"><span class="trust-icon">✓</span> One-off payment, yours to keep</div>
+    <div class="trust-item"><span class="trust-icon">✓</span> Updated each season</div>
+  </div>
+</div>
+
+<!-- PACKS -->
+<div class="packs-section">
+  <div class="packs-inner">
+    <div class="section-label">Choose Your Pack</div>
+    <h2 class="section-heading">Pick Your Division</h2>
+
+    <div class="packs-grid">
+
+      <!-- PREMIER LEAGUE PACK -->
+      <div class="pack-card coming-soon">
+        <div class="pack-badge soon">Coming Soon</div>
+        <div class="pack-header">
+          <div class="pack-league">Premier League</div>
+          <div class="pack-name">Premier League Pack</div>
+          <div class="pack-desc">All 20 Premier League away grounds in one complete PDF. Everything you need for every away day this season.</div>
+        </div>
+        <div class="pack-contents">
+          <div class="pack-contents-label">What's included</div>
+          <div class="pack-includes">
+            <div class="pack-include-item"><span class="include-tick coming">✓</span> Away end details for all 20 grounds</div>
+            <div class="pack-include-item"><span class="include-tick coming">✓</span> Pub recommendations — away-friendly and avoid lists</div>
+            <div class="pack-include-item"><span class="include-tick coming">✓</span> Travel guides — train, bus and car for every ground</div>
+            <div class="pack-include-item"><span class="include-tick coming">✓</span> Practical tips fans often miss</div>
+            <div class="pack-include-item"><span class="include-tick coming">✓</span> Ratings — overall, atmosphere, view, travel, pubs</div>
+            <div class="pack-include-item"><span class="include-tick coming">✓</span> Matchday plan for each ground</div>
+          </div>
+          <div class="pack-contents-label">Grounds covered</div>
+          <div class="pack-grounds">
+            <span class="ground-chip">Old Trafford</span>
+            <span class="ground-chip">Anfield</span>
+            <span class="ground-chip">Stamford Bridge</span>
+            <span class="ground-chip">Tottenham</span>
+            <span class="ground-chip">Emirates</span>
+            <span class="ground-chip">Etihad</span>
+            <span class="ground-chip">St James' Park</span>
+            <span class="ground-chip">Villa Park</span>
+            <span class="ground-chip">Elland Road</span>
+            <span class="ground-chip">+ 11 more</span>
+          </div>
+          <div class="pack-contents-label" style="margin-top:16px;">Notify me when it's ready</div>
+          <div style="margin-top:12px;">
+            <a href="index.html#newsletter" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.5);padding:12px 18px;border-radius:4px;text-decoration:none;font-size:13px;font-weight:600;border:1px solid rgba(255,255,255,0.08);transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(242,163,29,0.3)';this.style.color='var(--white)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.color='rgba(255,255,255,0.5)'">Join the newsletter →</a>
+          </div>
+        </div>
+        <div class="pack-footer">
+          <div class="pack-price-row">
+            <div class="pack-price" style="color:rgba(255,255,255,0.2);">£9.99</div>
+            <div class="pack-price-note">coming soon</div>
+          </div>
+          <a class="btn-buy disabled">Coming Soon</a>
+        </div>
+      </div>
+
+      <!-- CHAMPIONSHIP PACK -->
+      <div class="pack-card coming-soon">
+        <div class="pack-badge soon">Coming Soon</div>
+        <div class="pack-header">
+          <div class="pack-league">EFL Championship</div>
+          <div class="pack-name">Championship Pack</div>
+          <div class="pack-desc">All 24 Championship away grounds — perfect if your club is climbing the divisions or heading back up.</div>
+        </div>
+        <div class="pack-contents">
+          <div class="pack-contents-label">What's included</div>
+          <div class="pack-includes">
+            <div class="pack-include-item"><span class="include-tick coming">✓</span> Away end details for all 24 grounds</div>
+            <div class="pack-include-item"><span class="include-tick coming">✓</span> Pub recommendations for every city</div>
+            <div class="pack-include-item"><span class="include-tick coming">✓</span> Travel guides — train, bus and car</div>
+            <div class="pack-include-item"><span class="include-tick coming">✓</span> Practical tips and matchday plans</div>
+            <div class="pack-include-item"><span class="include-tick coming">✓</span> Full ratings breakdown</div>
+          </div>
+          <div class="pack-contents-label" style="margin-top:8px;">Notify me when it's ready</div>
+          <div style="margin-top:12px;">
+            <a href="index.html#newsletter" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.5);padding:12px 18px;border-radius:4px;text-decoration:none;font-size:13px;font-weight:600;border:1px solid rgba(255,255,255,0.08);transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(242,163,29,0.3)';this.style.color='var(--white)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.color='rgba(255,255,255,0.5)'">Join the newsletter →</a>
+          </div>
+        </div>
+        <div class="pack-footer">
+          <div class="pack-price-row">
+            <div class="pack-price" style="color:rgba(255,255,255,0.2);">£9.99</div>
+            <div class="pack-price-note">coming soon</div>
+          </div>
+          <a class="btn-buy disabled">Coming Soon</a>
+        </div>
+      </div>
+
+      <!-- EUROPEAN PACK -->
+      <div class="pack-card coming-soon">
+        <div class="pack-badge soon">Coming Soon</div>
+        <div class="pack-header">
+          <div class="pack-league">European Away Days</div>
+          <div class="pack-name">European Pack</div>
+          <div class="pack-desc">Champions League, Europa League and international away days — written for fans travelling from the UK and from mainland Europe.</div>
+        </div>
+        <div class="pack-contents">
+          <div class="pack-contents-label">What's included</div>
+          <div class="pack-includes">
+            <div class="pack-include-item"><span class="include-tick coming">✓</span> Top European away grounds</div>
+            <div class="pack-include-item"><span class="include-tick coming">✓</span> Travel from UK and mainland Europe</div>
+            <div class="pack-include-item"><span class="include-tick coming">✓</span> Accommodation guide for each city</div>
+            <div class="pack-include-item"><span class="include-tick coming">✓</span> Bar and pub guide — away-friendly venues</div>
+            <div class="pack-include-item"><span class="include-tick coming">✓</span> Local tips from fans who've been</div>
+          </div>
+          <div class="pack-contents-label" style="margin-top:8px;">Notify me when it's ready</div>
+          <div style="margin-top:12px;">
+            <a href="index.html#newsletter" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.5);padding:12px 18px;border-radius:4px;text-decoration:none;font-size:13px;font-weight:600;border:1px solid rgba(255,255,255,0.08);transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(242,163,29,0.3)';this.style.color='var(--white)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.color='rgba(255,255,255,0.5)'">Join the newsletter →</a>
+          </div>
+        </div>
+        <div class="pack-footer">
+          <div class="pack-price-row">
+            <div class="pack-price" style="color:rgba(255,255,255,0.2);">£12.99</div>
+            <div class="pack-price-note">coming soon</div>
+          </div>
+          <a class="btn-buy disabled">Coming Soon</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- WHAT'S INSIDE -->
+<div class="inside-section">
+  <div class="inside-inner">
+    <div class="section-label">What You Get</div>
+    <h2 class="section-heading">Built for Away Fans</h2>
+    <div class="inside-grid">
+      <div class="inside-card">
+        <div class="inside-icon">🏟️</div>
+        <div class="inside-title">The Away End</div>
+        <div class="inside-text">Where you're sitting, how to get in, what the view's like, and what to expect from the atmosphere.</div>
+      </div>
+      <div class="inside-card">
+        <div class="inside-icon">🍺</div>
+        <div class="inside-title">Pubs That Work</div>
+        <div class="inside-text">Away-friendly pubs with clear avoid warnings. No guesswork, no turning up somewhere you shouldn't be.</div>
+      </div>
+      <div class="inside-card">
+        <div class="inside-icon">🚂</div>
+        <div class="inside-title">Getting There</div>
+        <div class="inside-text">Train, bus and car options for every ground with step-by-step directions from the city centre.</div>
+      </div>
+      <div class="inside-card">
+        <div class="inside-icon">⭐</div>
+        <div class="inside-title">Honest Ratings</div>
+        <div class="inside-text">Every ground rated out of 10 for overall experience, atmosphere, view, travel and pubs. No bias.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="faq-inner">
+    <div class="section-label">Questions</div>
+    <h2 class="section-heading">FAQ</h2>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How do I get the guide after purchasing?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">Instantly. After checkout via Gumroad you'll receive a download link by email. The guide is a PDF you can save to your phone, tablet or computer and use offline on matchday.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What format are the guides in?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">PDF. It opens on any device — iPhone, Android, tablet, laptop — with no app required. You can also print it if you prefer.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Are the guides updated?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">Yes. Packs are reviewed and updated at the start of each season to reflect ground changes, new pub information, and any updated transport links. Buyers receive updated versions via Gumroad.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Can I read the guides for free on the site?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">Individual ground guides are free on the site — you can read them any time. The packs bundle all guides into one offline PDF with additional content, making it easier to plan your whole season in one go.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          When will the Championship and European packs be available?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">The Championship pack is in production and will be available later this season. The European pack follows after that. Sign up to the newsletter to be first to know when they drop.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Is there a bundle deal?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">A bundle covering all three packs will be available once the Championship and European packs are live. Newsletter subscribers will get early access and a discount.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <div class="cta-inner">
+    <h2 class="cta-title">Your Away Day, Sorted.</h2>
+    <p class="cta-sub">Packs are coming. Sign up to the newsletter and be first to know when they drop.</p>
+    <a href="index.html#newsletter" class="btn-cta-dark">
+      Join the Newsletter
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-name">AWAY <span>END</span></div>
+      <div class="footer-tagline">Your Away Day, Sorted.</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#guides">Ground Guides</a>
+      <a href="packs.html">Packs</a>
+      <a href="index.html#newsletter">Newsletter</a>
+    </div>
+  </div>
+  <div class="footer-inner" style="margin-top:0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05);">
+    <p class="footer-copy">© 2026 Away End. All rights reserved.</p>
+    <p class="footer-affiliate-note">Away End uses affiliate links. We may earn a commission when you book via our partners, at no extra cost to you.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("burger").addEventListener("click", () => {
+    document.getElementById("navLinks").classList.toggle("open");
+  });
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    item.classList.toggle("open");
+  }
+</script>
+
+</body>
+</html>
 
