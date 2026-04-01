@@ -1,1 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Away End is a fan-first football away day planning platform. Built by a lifelong Manchester City fan based in Switzerland.">
+<meta name="keywords" content="Away End, football away day guide, about, away fan platform">
+<title>About | Away End</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1B5E3B; --green-dark: #113d27; --green-light: #226b44;
+    --amber: #F2A31D; --amber-dark: #d4891a;
+    --white: #FFFFFF; --charcoal: #1A1A18;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: "DM Sans", sans-serif; background: var(--green); color: var(--white); overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 64px; background: rgba(14,48,30,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(242,163,29,0.15); }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--white); }
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--amber); }
+  .nav-cta { background: var(--amber); color: var(--charcoal) !important; padding: 9px 16px; border-radius: 4px; font-weight: 700 !important; display: inline-flex !important; align-items: center !important; white-space: nowrap; }
+  .nav-cta:hover { background: var(--amber-dark) !important; }
+  .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .nav-burger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
+
+  /* HERO */
+  .page-hero { padding: 140px 40px 80px; position: relative; overflow: hidden; }
+  .page-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.15) 0%, transparent 60%); z-index: 0; }
+  .hero-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; text-align: center; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(242,163,29,0.12); border: 1px solid rgba(242,163,29,0.25); color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 2px; margin-bottom: 20px; }
+  .hero-title { font-family: "Bebas Neue", cursive; font-size: clamp(52px, 8vw, 96px); line-height: 0.9; letter-spacing: 2px; margin-bottom: 24px; }
+  .hero-title span { color: var(--amber); }
+  .hero-sub { font-size: 18px; color: rgba(255,255,255,0.6); line-height: 1.75; }
+
+  /* STORY */
+  .story-section { padding: 80px 40px; }
+  .story-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; align-items: start; }
+  .story-main { background: var(--green-dark); padding: 52px; }
+  .story-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); margin-bottom: 12px; }
+  .story-heading { font-family: "Bebas Neue", cursive; font-size: 44px; letter-spacing: 1px; margin-bottom: 28px; line-height: 1; }
+  .story-body { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.85; }
+  .story-body p + p { margin-top: 18px; }
+  .story-body strong { color: var(--white); font-weight: 600; }
+
+  .story-aside { display: flex; flex-direction: column; gap: 4px; }
+  .aside-card { background: var(--green-dark); padding: 32px; }
+  .aside-card-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 10px; }
+  .aside-card-value { font-family: "Bebas Neue", cursive; font-size: 28px; letter-spacing: 0.5px; color: var(--white); line-height: 1.1; margin-bottom: 6px; }
+  .aside-card-sub { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.5; }
+  .aside-card-value span { color: var(--amber); }
+
+  /* VALUES */
+  .values-section { background: var(--green-dark); padding: 80px 40px; }
+  .values-inner { max-width: 1280px; margin: 0 auto; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); margin-bottom: 10px; }
+  .section-heading { font-family: "Bebas Neue", cursive; font-size: clamp(36px, 5vw, 56px); letter-spacing: 1px; margin-bottom: 48px; }
+  .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+  .value-card { background: var(--green); padding: 32px 28px; border-top: 3px solid transparent; transition: all 0.2s; }
+  .value-card:hover { background: var(--green-light); border-top-color: var(--amber); }
+  .value-icon { font-size: 28px; margin-bottom: 16px; }
+  .value-title { font-family: "Bebas Neue", cursive; font-size: 22px; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .value-text { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.65; }
+
+  /* MISSION */
+  .mission-section { padding: 80px 40px; }
+  .mission-inner { max-width: 1280px; margin: 0 auto; }
+  .mission-block { background: var(--amber); padding: 64px; position: relative; overflow: hidden; }
+  .mission-block::before { content: '"'; position: absolute; top: -20px; left: 20px; font-family: "Bebas Neue", cursive; font-size: 300px; color: rgba(26,26,24,0.05); line-height: 1; pointer-events: none; }
+  .mission-quote { font-family: "Bebas Neue", cursive; font-size: clamp(28px, 4vw, 48px); color: var(--charcoal); line-height: 1.1; letter-spacing: 1px; max-width: 780px; position: relative; z-index: 1; margin-bottom: 20px; }
+  .mission-attr { font-size: 13px; color: rgba(26,26,24,0.5); position: relative; z-index: 1; font-weight: 600; letter-spacing: 0.5px; }
+
+  /* HOW WE WORK */
+  .how-section { background: var(--green-dark); padding: 80px 40px; }
+  .how-inner { max-width: 1280px; margin: 0 auto; }
+  .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 48px; }
+  .how-card { background: var(--green); padding: 36px 32px; }
+  .how-num { font-family: "Bebas Neue", cursive; font-size: 64px; color: rgba(242,163,29,0.1); line-height: 1; margin-bottom: 16px; }
+  .how-title { font-family: "Bebas Neue", cursive; font-size: 22px; letter-spacing: 0.5px; margin-bottom: 10px; color: var(--white); }
+  .how-text { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.65; }
+
+  /* SOCIAL */
+  .social-section { padding: 80px 40px; }
+  .social-inner { max-width: 1280px; margin: 0 auto; }
+  .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 40px; }
+  .social-card { background: var(--green-dark); padding: 32px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; transition: background 0.2s; border-top: 2px solid rgba(255,255,255,0.05); }
+  .social-card:hover { background: var(--green-light); border-top-color: var(--amber); }
+  .social-platform { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); }
+  .social-handle { font-family: "Bebas Neue", cursive; font-size: 28px; letter-spacing: 0.5px; color: var(--white); }
+  .social-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.55; }
+  .social-follow { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.3); margin-top: auto; display: flex; align-items: center; gap: 6px; }
+  .social-card:hover .social-follow { color: var(--amber); }
+
+  /* CTA */
+  .cta-strip { background: var(--amber); padding: 64px 40px; text-align: center; position: relative; overflow: hidden; }
+  .cta-strip::before { content: 'YOUR AWAY DAY SORTED'; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-family: "Bebas Neue", cursive; font-size: 120px; color: rgba(26,26,24,0.05); white-space: nowrap; pointer-events: none; }
+  .cta-inner { max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
+  .cta-title { font-family: "Bebas Neue", cursive; font-size: clamp(36px, 5vw, 64px); color: var(--charcoal); letter-spacing: 2px; line-height: 0.95; margin-bottom: 16px; }
+  .cta-sub { font-size: 15px; color: rgba(26,26,24,0.6); margin-bottom: 32px; line-height: 1.6; }
+  .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-dark { display: inline-flex; align-items: center; gap: 8px; background: var(--charcoal); color: var(--white); padding: 14px 28px; border-radius: 4px; text-decoration: none; font-family: "Bebas Neue", cursive; font-size: 18px; letter-spacing: 1px; transition: all 0.2s; }
+  .btn-dark:hover { background: #2a2a28; transform: translateY(-1px); }
+  .btn-outline-dark { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--charcoal); border: 2px solid rgba(26,26,24,0.25); padding: 14px 28px; border-radius: 4px; text-decoration: none; font-family: "Bebas Neue", cursive; font-size: 18px; letter-spacing: 1px; transition: all 0.2s; }
+  .btn-outline-dark:hover { border-color: var(--charcoal); background: rgba(26,26,24,0.08); }
+
+  /* FOOTER */
+  footer { background: var(--green-dark); border-top: 1px solid rgba(255,255,255,0.05); padding: 48px 40px 28px; }
+  .footer-inner { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; }
+  .footer-brand-name { font-family: "Bebas Neue", cursive; font-size: 24px; letter-spacing: 2px; }
+  .footer-brand-name span { color: var(--amber); }
+  .footer-tagline { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 4px; letter-spacing: 1.5px; text-transform: uppercase; }
+  .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+  .footer-links a { font-size: 13px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--amber); }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.18); margin-top: 28px; width: 100%; }
+  .footer-affiliate-note { font-size: 11px; color: rgba(255,255,255,0.15); margin-top: 6px; line-height: 1.5; }
+
+  /* MOBILE */
+  @media (max-width: 1024px) { .story-inner { grid-template-columns: 1fr; } .values-grid { grid-template-columns: 1fr 1fr; } .how-grid { grid-template-columns: 1fr 1fr; } .social-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--green-dark); padding: 20px; gap: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .nav-burger { display: flex; }
+    .page-hero { padding: 120px 20px 60px; }
+    .story-section, .values-section, .mission-section, .how-section, .social-section { padding: 60px 20px; }
+    .story-main { padding: 36px 28px; }
+    .mission-block { padding: 40px 28px; }
+    .values-grid { grid-template-columns: 1fr; }
+    .how-grid { grid-template-columns: 1fr; }
+    .social-grid { grid-template-columns: 1fr; }
+    .cta-strip { padding: 48px 20px; }
+    footer { padding: 40px 20px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <span style="font-family:'Bebas Neue',cursive;font-size:22px;letter-spacing:2px;color:var(--white);">AWAY <span style="color:var(--amber)">END</span></span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="guides.html">Ground Guides</a></li>
+    <li><a href="packs.html">Packs</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="index.html#newsletter" class="nav-cta">Get the Newsletter</a></li>
+  </ul>
+  <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="hero-tag">About Away End</div>
+    <h1 class="hero-title">Built by a Fan.<br><span>For Fans.</span></h1>
+    <p class="hero-sub">Away End exists because planning an away day shouldn't be harder than the journey itself.</p>
+  </div>
+</div>
+
+<!-- STORY -->
+<div class="story-section">
+  <div class="story-inner">
+    <div class="story-main">
+      <div class="story-label">The Story</div>
+      <h2 class="story-heading">Why Away End Exists</h2>
+      <div class="story-body">
+        <p>Every away day starts the same way. You open five different tabs — the club website, Trainline, Google Maps, a Reddit thread from 2019, and a Facebook group that hasn't been updated in three years. You piece together a rough plan and hope for the best.</p>
+        <p>Away End was built to fix that. <strong>One place. Everything you need. Written by someone who's been there.</strong></p>
+        <p>The founder is a lifelong Manchester City fan who has followed the club to grounds across the UK and Europe. Based in Switzerland, there's a particular understanding of what it takes to plan a trip from further afield — the extra research, the unfamiliar train systems, the question of where on earth you're supposed to drink before a game in a city you don't know.</p>
+        <p>That experience is what drives every guide we publish. Not SEO checklists. Not AI-generated filler. Real, verified, fan-first information that you can actually rely on matchday.</p>
+        <p><strong>Accuracy is the brand.</strong> We'd rather publish fewer guides that are right than more guides that aren't. Every pub recommendation is verified. Every avoid warning is genuine. If we're not confident, we say so.</p>
+      </div>
+    </div>
+    <div class="story-aside">
+      <div class="aside-card">
+        <div class="aside-card-label">Founded</div>
+        <div class="aside-card-value">2025</div>
+        <div class="aside-card-sub">Built from scratch by one fan with a laptop and too many away day memories.</div>
+      </div>
+      <div class="aside-card">
+        <div class="aside-card-label">Based</div>
+        <div class="aside-card-value">Switzerland <span>🇨🇭</span></div>
+        <div class="aside-card-sub">Which means we understand the European away day angle better than anyone.</div>
+      </div>
+      <div class="aside-card">
+        <div class="aside-card-label">Supported</div>
+        <div class="aside-card-value">Manchester <span>City</span></div>
+        <div class="aside-card-sub">Lifelong Blue. Extensive away day experience across the UK and Europe.</div>
+      </div>
+      <div class="aside-card">
+        <div class="aside-card-label">Mission</div>
+        <div class="aside-card-value" style="font-size:20px;line-height:1.2;">Every Away Day, Sorted.</div>
+        <div class="aside-card-sub">For every fan. Every ground. Every country.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VALUES -->
+<div class="values-section">
+  <div class="values-inner">
+    <div class="section-label">What We Stand For</div>
+    <h2 class="section-heading">Our Values</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">✅</div>
+        <div class="value-title">Accuracy First</div>
+        <div class="value-text">Every guide is verified against multiple sources before it goes live. We never publish AI-generated content as fact. If it's on the site, we stand behind it.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🏟️</div>
+        <div class="value-title">Fan-First Always</div>
+        <div class="value-text">We write for away fans, not for search engines. The tone is direct, the information is practical, and there's no corporate filler. We talk like supporters.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🌍</div>
+        <div class="value-title">European Angle</div>
+        <div class="value-text">No competitor serves the European away fan properly. We do. Whether you're flying from Zurich or driving from Manchester, Away End has you covered.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🔄</div>
+        <div class="value-title">Always Improving</div>
+        <div class="value-text">Pubs change. Prices change. Transport changes. We update guides regularly and flag anything we're not confident about rather than leaving stale information live.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MISSION QUOTE -->
+<div class="mission-section">
+  <div class="mission-inner">
+    <div class="mission-block">
+      <div class="mission-quote">To make every away day easier, better, and more memorable — for every football fan, at every ground, in every country.</div>
+      <div class="mission-attr">Away End — Mission Statement</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW WE WORK -->
+<div class="how-section">
+  <div class="how-inner">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-heading">How We Build Our Guides</h2>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">01</div>
+        <div class="how-title">Verified Sources Only</div>
+        <div class="how-text">Every guide starts with club official away fan pages, footballgroundguide.com, and recent Google Maps reviews from real visitors. We cross-reference everything and never rely on a single source.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">02</div>
+        <div class="how-title">Fan Community Input</div>
+        <div class="how-text">We monitor fan forums and club subreddits for real-world experience. If fans are reporting a pub has gone home-only, we update the guide. Community knowledge is our most valuable asset.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">03</div>
+        <div class="how-title">Honest Over Helpful</div>
+        <div class="how-text">We'd rather tell you a ground has a poor away end than pretend it's fine. We'd rather say there are no good pubs near the ground than recommend somewhere that gets you in trouble. Honesty is the brand.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL -->
+<div class="social-section">
+  <div class="social-inner">
+    <div class="section-label">Find Us</div>
+    <h2 class="section-heading">Follow Away End</h2>
+    <div class="social-grid">
+      <a class="social-card" href="https://www.tiktok.com/@awayend" target="_blank" rel="noopener">
+        <div class="social-platform">TikTok</div>
+        <div class="social-handle">@AwayEnd</div>
+        <div class="social-desc">Short-form ground guides, away day tips and matchday content. Our primary channel — follow for new guides every week.</div>
+        <div class="social-follow">Follow on TikTok →</div>
+      </a>
+      <a class="social-card" href="https://www.instagram.com/awayend" target="_blank" rel="noopener">
+        <div class="social-platform">Instagram</div>
+        <div class="social-handle">@AwayEnd</div>
+        <div class="social-desc">Carousel guides, ground photography and away day content. Save our posts — they're built to be useful on matchday.</div>
+        <div class="social-follow">Follow on Instagram →</div>
+      </a>
+      <a class="social-card" href="https://twitter.com/AwayEndCo_" target="_blank" rel="noopener">
+        <div class="social-platform">X / Twitter</div>
+        <div class="social-handle">@AwayEndCo_</div>
+        <div class="social-desc">Away day chat, new guide announcements and matchday updates. Come and talk football.</div>
+        <div class="social-follow">Follow on X →</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <div class="cta-inner">
+    <h2 class="cta-title">Ready for Your Next Away Day?</h2>
+    <p class="cta-sub">Browse the guides, sign up for the newsletter and never go into an away end unprepared again.</p>
+    <div class="cta-buttons">
+      <a href="guides.html" class="btn-dark">Browse Guides →</a>
+      <a href="index.html#newsletter" class="btn-outline-dark">Get the Newsletter</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-name">AWAY <span>END</span></div>
+      <div class="footer-tagline">Your Away Day, Sorted.</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="guides.html">Ground Guides</a>
+      <a href="packs.html">Packs</a>
+      <a href="about.html">About</a>
+      <a href="index.html#newsletter">Newsletter</a>
+    </div>
+  </div>
+  <div class="footer-inner" style="margin-top:0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05);">
+    <p class="footer-copy">© 2026 Away End. All rights reserved.</p>
+    <p class="footer-affiliate-note">Away End uses affiliate links. We may earn a commission when you book via our partners, at no extra cost to you.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("burger").addEventListener("click", () => {
+    document.getElementById("navLinks").classList.toggle("open");
+  });
+</script>
+
+</body>
+</html>
 
