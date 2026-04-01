@@ -1,1 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Every away day guide in one place. Ground guides for Premier League, Championship and European fixtures — pubs, travel, away end info and ratings.">
+<meta name="keywords" content="football away day guides, Premier League away guides, away end guide, away day planner, football ground guide">
+<title>Ground Guides | Away End</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1B5E3B; --green-dark: #113d27; --green-light: #226b44;
+    --amber: #F2A31D; --amber-dark: #d4891a;
+    --white: #FFFFFF; --charcoal: #1A1A18;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: "DM Sans", sans-serif; background: var(--green); color: var(--white); overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 64px; background: rgba(14,48,30,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(242,163,29,0.15); }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--white); }
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--amber); }
+  .nav-cta { background: var(--amber); color: var(--charcoal) !important; padding: 9px 16px; border-radius: 4px; font-weight: 700 !important; display: inline-flex !important; align-items: center !important; white-space: nowrap; }
+  .nav-cta:hover { background: var(--amber-dark) !important; }
+  .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .nav-burger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
+
+  /* HERO */
+  .page-hero { padding: 130px 40px 70px; position: relative; overflow: hidden; }
+  .page-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.15) 0%, transparent 60%); z-index: 0; }
+  .hero-inner { max-width: 1280px; margin: 0 auto; position: relative; z-index: 1; }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 24px; }
+  .breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--amber); }
+  .hero-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(242,163,29,0.12); border: 1px solid rgba(242,163,29,0.25); color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 2px; margin-bottom: 16px; }
+  .hero-title { font-family: "Bebas Neue", cursive; font-size: clamp(52px, 8vw, 100px); line-height: 0.9; letter-spacing: 2px; margin-bottom: 16px; }
+  .hero-title span { color: var(--amber); }
+  .hero-sub { font-size: 16px; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 560px; }
+
+  /* STATS ROW */
+  .stats-row { display: flex; gap: 2px; margin-top: 48px; }
+  .stat-block { background: rgba(0,0,0,0.2); padding: 20px 28px; flex: 1; border-top: 2px solid rgba(255,255,255,0.06); }
+  .stat-block:first-child { border-top-color: var(--amber); }
+  .stat-num { font-family: "Bebas Neue", cursive; font-size: 36px; color: var(--amber); line-height: 1; margin-bottom: 4px; }
+  .stat-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+
+  /* PACK PROMO BANNER */
+  .pack-banner { background: var(--amber); padding: 20px 40px; }
+  .pack-banner-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  .pack-banner-text { font-size: 14px; color: var(--charcoal); font-weight: 600; }
+  .pack-banner-text strong { font-family: "Bebas Neue", cursive; font-size: 18px; letter-spacing: 0.5px; display: block; margin-bottom: 2px; }
+  .pack-banner-btn { background: var(--charcoal); color: var(--white); padding: 10px 20px; border-radius: 4px; text-decoration: none; font-family: "Bebas Neue", cursive; font-size: 16px; letter-spacing: 1px; white-space: nowrap; transition: all 0.2s; }
+  .pack-banner-btn:hover { background: #2a2a28; }
+
+  /* GUIDES SECTIONS */
+  .guides-page { padding: 64px 40px 80px; }
+  .guides-page-inner { max-width: 1280px; margin: 0 auto; }
+
+  .league-section { margin-bottom: 72px; }
+  .league-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.07); flex-wrap: wrap; gap: 12px; }
+  .league-title-group { display: flex; align-items: center; gap: 16px; }
+  .league-tag { background: rgba(242,163,29,0.1); border: 1px solid rgba(242,163,29,0.2); color: var(--amber); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; }
+  .league-name { font-family: "Bebas Neue", cursive; font-size: 32px; letter-spacing: 1px; }
+  .league-count { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+  /* GUIDE CARDS */
+  .guides-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+
+  .guide-card { background: var(--green-dark); text-decoration: none; display: block; border-left: 3px solid transparent; transition: all 0.2s; padding: 24px; position: relative; }
+  .guide-card:hover { background: var(--green-light); border-left-color: var(--amber); }
+  .guide-card.coming-soon { opacity: 0.45; pointer-events: none; }
+
+  .guide-card-league { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); margin-bottom: 8px; }
+  .guide-card-ground { font-family: "Bebas Neue", cursive; font-size: 24px; letter-spacing: 0.5px; color: var(--white); margin-bottom: 2px; line-height: 1.05; }
+  .guide-card-club { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+
+  .guide-card-rating { display: flex; align-items: baseline; gap: 4px; margin-bottom: 12px; }
+  .rating-num { font-family: "Bebas Neue", cursive; font-size: 22px; color: var(--amber); line-height: 1; }
+  .rating-denom { font-family: "Bebas Neue", cursive; font-size: 13px; color: rgba(255,255,255,0.25); }
+  .rating-label { font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 0.5px; }
+
+  .guide-card-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .guide-tag { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 2px; padding: 2px 8px; font-size: 10px; color: rgba(255,255,255,0.35); }
+
+  .guide-card-arrow { position: absolute; top: 24px; right: 20px; font-size: 16px; color: rgba(255,255,255,0.15); transition: color 0.2s; }
+  .guide-card:hover .guide-card-arrow { color: var(--amber); }
+
+  .coming-soon-badge { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.3); font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; }
+
+  /* EUROPEAN TEASER */
+  .european-teaser { background: var(--green-dark); padding: 48px; border-left: 3px solid var(--amber); display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  .european-teaser-text h3 { font-family: "Bebas Neue", cursive; font-size: 36px; letter-spacing: 1px; margin-bottom: 8px; }
+  .european-teaser-text p { font-size: 14px; color: rgba(255,255,255,0.5); max-width: 480px; line-height: 1.6; }
+  .btn-teaser { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.1); padding: 12px 24px; border-radius: 4px; text-decoration: none; font-family: "Bebas Neue", cursive; font-size: 16px; letter-spacing: 1px; transition: all 0.2s; white-space: nowrap; }
+  .btn-teaser:hover { border-color: var(--amber); color: var(--amber); }
+
+  /* FOOTER */
+  footer { background: var(--green-dark); border-top: 1px solid rgba(255,255,255,0.05); padding: 48px 40px 28px; }
+  .footer-inner { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; }
+  .footer-brand-name { font-family: "Bebas Neue", cursive; font-size: 24px; letter-spacing: 2px; }
+  .footer-brand-name span { color: var(--amber); }
+  .footer-tagline { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 4px; letter-spacing: 1.5px; text-transform: uppercase; }
+  .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+  .footer-links a { font-size: 13px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--amber); }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.18); margin-top: 28px; width: 100%; }
+  .footer-affiliate-note { font-size: 11px; color: rgba(255,255,255,0.15); margin-top: 6px; line-height: 1.5; }
+
+  /* MOBILE */
+  @media (max-width: 1024px) { .guides-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 768px) { .guides-grid { grid-template-columns: repeat(2, 1fr); } .stats-row { flex-wrap: wrap; } .stat-block { flex: 1 1 calc(50% - 2px); } }
+  @media (max-width: 640px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--green-dark); padding: 20px; gap: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .nav-burger { display: flex; }
+    .page-hero { padding: 110px 20px 50px; }
+    .pack-banner { padding: 20px; }
+    .guides-page { padding: 48px 20px 60px; }
+    .guides-grid { grid-template-columns: 1fr 1fr; }
+    .european-teaser { padding: 32px 24px; }
+    footer { padding: 40px 20px 24px; }
+  }
+  @media (max-width: 420px) { .guides-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <span style="font-family:'Bebas Neue',cursive;font-size:22px;letter-spacing:2px;color:var(--white);">AWAY <span style="color:var(--amber)">END</span></span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="guides.html" class="active">Ground Guides</a></li>
+    <li><a href="packs.html">Packs</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="index.html#newsletter" class="nav-cta">Get the Newsletter</a></li>
+  </ul>
+  <button class="nav-burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> <span>›</span> Ground Guides</div>
+    <div class="hero-tag">🏟️ Ground Guides</div>
+    <h1 class="hero-title">Every Ground.<br><span>Fan-First.</span></h1>
+    <p class="hero-sub">Away end details, pub recommendations, travel guides and honest ratings — all verified, all written for away fans.</p>
+    <div class="stats-row">
+      <div class="stat-block"><div class="stat-num">8</div><div class="stat-label">Guides Live</div></div>
+      <div class="stat-block"><div class="stat-num">20</div><div class="stat-label">Premier League Grounds</div></div>
+      <div class="stat-block"><div class="stat-num">92+</div><div class="stat-label">Target Coverage</div></div>
+      <div class="stat-block"><div class="stat-num">/10</div><div class="stat-label">Rating System</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PACK PROMO BANNER -->
+<div class="pack-banner">
+  <div class="pack-banner-inner">
+    <div class="pack-banner-text">
+      <strong>Premier League Pack — Coming Soon</strong>
+      All 20 grounds in one PDF download. Sign up to be first to know.
+    </div>
+    <a href="index.html#newsletter" class="pack-banner-btn">Join the Newsletter →</a>
+  </div>
+</div>
+
+<!-- GUIDES -->
+<div class="guides-page">
+  <div class="guides-page-inner">
+
+    <!-- PREMIER LEAGUE -->
+    <div class="league-section">
+      <div class="league-header">
+        <div class="league-title-group">
+          <span class="league-tag">Premier League</span>
+          <span class="league-name">Premier League</span>
+        </div>
+        <span class="league-count">8 of 20 guides live</span>
+      </div>
+      <div class="guides-grid">
+
+        <!-- LIVE GUIDES -->
+        <a class="guide-card" href="guides/old-trafford.html">
+          <div class="guide-card-arrow">→</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">Old Trafford</div>
+          <div class="guide-card-club">Manchester United</div>
+          <div class="guide-card-rating">
+            <span class="rating-num">7</span><span class="rating-denom">/10</span>
+            <span class="rating-label">Away Rating</span>
+          </div>
+          <div class="guide-card-tags">
+            <span class="guide-tag">Iconic Ground</span>
+            <span class="guide-tag">Plan Pubs Ahead</span>
+          </div>
+        </a>
+
+        <a class="guide-card" href="guides/anfield.html">
+          <div class="guide-card-arrow">→</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">Anfield</div>
+          <div class="guide-card-club">Liverpool FC</div>
+          <div class="guide-card-rating">
+            <span class="rating-num">7.5</span><span class="rating-denom">/10</span>
+            <span class="rating-label">Away Rating</span>
+          </div>
+          <div class="guide-card-tags">
+            <span class="guide-tag">Great Atmosphere</span>
+            <span class="guide-tag">Arrive Early</span>
+          </div>
+        </a>
+
+        <a class="guide-card" href="guides/st-james-park.html">
+          <div class="guide-card-arrow">→</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">St James' Park</div>
+          <div class="guide-card-club">Newcastle United</div>
+          <div class="guide-card-rating">
+            <span class="rating-num">8</span><span class="rating-denom">/10</span>
+            <span class="rating-label">Away Rating</span>
+          </div>
+          <div class="guide-card-tags">
+            <span class="guide-tag">Top Away Day</span>
+            <span class="guide-tag">City Centre Pubs</span>
+          </div>
+        </a>
+
+        <a class="guide-card" href="guides/villa-park.html">
+          <div class="guide-card-arrow">→</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">Villa Park</div>
+          <div class="guide-card-club">Aston Villa</div>
+          <div class="guide-card-rating">
+            <span class="rating-num">7</span><span class="rating-denom">/10</span>
+            <span class="rating-label">Away Rating</span>
+          </div>
+          <div class="guide-card-tags">
+            <span class="guide-tag">Good Pubs Nearby</span>
+          </div>
+        </a>
+
+        <a class="guide-card" href="guides/tottenham.html">
+          <div class="guide-card-arrow">→</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">Tottenham Hotspur Stadium</div>
+          <div class="guide-card-club">Tottenham Hotspur</div>
+          <div class="guide-card-rating">
+            <span class="rating-num">7.5</span><span class="rating-denom">/10</span>
+            <span class="rating-label">Away Rating</span>
+          </div>
+          <div class="guide-card-tags">
+            <span class="guide-tag">Modern Ground</span>
+          </div>
+        </a>
+
+        <a class="guide-card" href="guides/stamford-bridge.html">
+          <div class="guide-card-arrow">→</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">Stamford Bridge</div>
+          <div class="guide-card-club">Chelsea FC</div>
+          <div class="guide-card-rating">
+            <span class="rating-num">6.5</span><span class="rating-denom">/10</span>
+            <span class="rating-label">Away Rating</span>
+          </div>
+          <div class="guide-card-tags">
+            <span class="guide-tag">Tight Away End</span>
+          </div>
+        </a>
+
+        <a class="guide-card" href="guides/elland-road.html">
+          <div class="guide-card-arrow">→</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">Elland Road</div>
+          <div class="guide-card-club">Leeds United</div>
+          <div class="guide-card-rating">
+            <span class="rating-num">7.5</span><span class="rating-denom">/10</span>
+            <span class="rating-label">Away Rating</span>
+          </div>
+          <div class="guide-card-tags">
+            <span class="guide-tag">Hostile Atmosphere</span>
+          </div>
+        </a>
+
+        <!-- COMING SOON — repeat for remaining 13 PL grounds -->
+        <div class="guide-card coming-soon">
+          <div class="coming-soon-badge">Coming Soon</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">Emirates Stadium</div>
+          <div class="guide-card-club">Arsenal</div>
+        </div>
+
+        <div class="guide-card coming-soon">
+          <div class="coming-soon-badge">Coming Soon</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">Etihad Stadium</div>
+          <div class="guide-card-club">Manchester City</div>
+        </div>
+
+        <div class="guide-card coming-soon">
+          <div class="coming-soon-badge">Coming Soon</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">Goodison Park</div>
+          <div class="guide-card-club">Everton</div>
+        </div>
+
+        <div class="guide-card coming-soon">
+          <div class="coming-soon-badge">Coming Soon</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">Molineux</div>
+          <div class="guide-card-club">Wolverhampton Wanderers</div>
+        </div>
+
+        <div class="guide-card coming-soon">
+          <div class="coming-soon-badge">Coming Soon</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">Selhurst Park</div>
+          <div class="guide-card-club">Crystal Palace</div>
+        </div>
+
+        <div class="guide-card coming-soon">
+          <div class="coming-soon-badge">Coming Soon</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">Gtech Community Stadium</div>
+          <div class="guide-card-club">Brentford</div>
+        </div>
+
+        <div class="guide-card coming-soon">
+          <div class="coming-soon-badge">Coming Soon</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">Vitality Stadium</div>
+          <div class="guide-card-club">Bournemouth</div>
+        </div>
+
+        <div class="guide-card coming-soon">
+          <div class="coming-soon-badge">Coming Soon</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">Amex Stadium</div>
+          <div class="guide-card-club">Brighton</div>
+        </div>
+
+        <div class="guide-card coming-soon">
+          <div class="coming-soon-badge">Coming Soon</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">Bramall Lane</div>
+          <div class="guide-card-club">Sheffield United</div>
+        </div>
+
+        <div class="guide-card coming-soon">
+          <div class="coming-soon-badge">Coming Soon</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">King Power Stadium</div>
+          <div class="guide-card-club">Leicester City</div>
+        </div>
+
+        <div class="guide-card coming-soon">
+          <div class="coming-soon-badge">Coming Soon</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">London Stadium</div>
+          <div class="guide-card-club">West Ham United</div>
+        </div>
+
+        <div class="guide-card coming-soon">
+          <div class="coming-soon-badge">Coming Soon</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">St Mary's Stadium</div>
+          <div class="guide-card-club">Southampton</div>
+        </div>
+
+        <div class="guide-card coming-soon">
+          <div class="coming-soon-badge">Coming Soon</div>
+          <div class="guide-card-league">Premier League</div>
+          <div class="guide-card-ground">The Hawthorns</div>
+          <div class="guide-card-club">West Brom</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SCOTTISH PREMIERSHIP -->
+    <div class="league-section">
+      <div class="league-header">
+        <div class="league-title-group">
+          <span class="league-tag">Scottish Premiership</span>
+          <span class="league-name">Scottish Premiership</span>
+        </div>
+        <span class="league-count">1 guide live</span>
+      </div>
+      <div class="guides-grid">
+
+        <a class="guide-card" href="guides/celtic-park.html">
+          <div class="guide-card-arrow">→</div>
+          <div class="guide-card-league">Scottish Premiership</div>
+          <div class="guide-card-ground">Celtic Park</div>
+          <div class="guide-card-club">Celtic FC</div>
+          <div class="guide-card-rating">
+            <span class="rating-num">7.5</span><span class="rating-denom">/10</span>
+            <span class="rating-label">Away Rating</span>
+          </div>
+          <div class="guide-card-tags">
+            <span class="guide-tag">Incredible Atmosphere</span>
+            <span class="guide-tag">No Pubs Near Ground</span>
+          </div>
+        </a>
+
+        <div class="guide-card coming-soon">
+          <div class="coming-soon-badge">Coming Soon</div>
+          <div class="guide-card-league">Scottish Premiership</div>
+          <div class="guide-card-ground">Ibrox Stadium</div>
+          <div class="guide-card-club">Rangers FC</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- EUROPEAN TEASER -->
+    <div class="european-teaser">
+      <div class="european-teaser-text">
+        <h3>European Away Days — Coming Soon</h3>
+        <p>Champions League, Europa League and international fixtures. Written for UK fans travelling abroad and European fans travelling to Britain. Sign up to the newsletter to be first to know when European guides drop.</p>
+      </div>
+      <a href="index.html#newsletter" class="btn-teaser">Get Notified →</a>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-name">AWAY <span>END</span></div>
+      <div class="footer-tagline">Your Away Day, Sorted.</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="guides.html">Ground Guides</a>
+      <a href="packs.html">Packs</a>
+      <a href="about.html">About</a>
+      <a href="index.html#newsletter">Newsletter</a>
+    </div>
+  </div>
+  <div class="footer-inner" style="margin-top:0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05);">
+    <p class="footer-copy">© 2026 Away End. All rights reserved.</p>
+    <p class="footer-affiliate-note">Away End uses affiliate links. We may earn a commission when you book via our partners, at no extra cost to you.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("burger").addEventListener("click", () => {
+    document.getElementById("navLinks").classList.toggle("open");
+  });
+</script>
+
+</body>
+</html>
 
